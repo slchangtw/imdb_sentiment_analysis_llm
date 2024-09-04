@@ -3,9 +3,7 @@ from elasticsearch import Elasticsearch
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
 
-from src.config import settings
-
-MAX_LENGTH = 512
+from config import settings
 
 
 def create_index(es_client: Elasticsearch, embedding_dim: int) -> None:
@@ -35,8 +33,8 @@ def index_review(
     reviews: pd.DataFrame,
     sentence_transformer: SentenceTransformer,
 ) -> None:
-    for _, row in tqdm(reviews.iterrows()):
-        review = row["review"][:MAX_LENGTH]
+    for _, row in tqdm(reviews.iterrows(), total=reviews.shape[0]):
+        review = row["review"]
         sentiment = row["sentiment"]
         score = row["score"]
         review_vector = sentence_transformer.encode(review)
