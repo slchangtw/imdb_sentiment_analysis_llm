@@ -21,6 +21,7 @@ sentence-transformers = "^3.0.1"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
+black = {extras = ["jupyter"], version = "^24.8.0"}
 
 [build-system]
 requires = ["poetry-core"]
